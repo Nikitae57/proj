@@ -1,7 +1,8 @@
-from tokens import Tokens
 from reader import Reader
+from token_list_builder import TokenListBuilder
 
-a = Reader.readSql('1')
-i = 1
+wordList = Reader.readSql('1')
+tokenList = TokenListBuilder.buildTokenList(wordList)
+print(tokenList)
 
 
