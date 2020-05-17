@@ -1,6 +1,7 @@
 libonnxruntime.so.0.5.0
 .directory
 .idea/
+__pycache__/
 
 # Built application files
 *.ap_

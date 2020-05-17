@@ -22,6 +22,7 @@ class TokensTypes:
         'DIGIT': r'^-?[0-9]+(\.[0-9]+)?$',
         'NAME': r'(`\S+`|[A-Za-z_][A-Za-z_0-9]*(\.[A-Za-z_0-9]+)?)',
         'EQUAL': r'=',
+        'NOT_EQUAL': r'!=',
         'NOT': r'NOT',
         'LIKE': r'LIKE',
         'OR': r'OR',
@@ -32,7 +33,45 @@ class TokensTypes:
         'MORE_OR_EQUAL': r'>=',
         'LESS': r'<',
         'LESS_OR_EQUAL': r'<=',
+        'PLUS': r'\+',
+        'MINUS': r'-',
+        'MULTIPLY': r'\*',
+        'DIVIDE': r'\/'
     }
+
+    SELECT = 'SELECT'
+    DISTINCT = 'DISTINCT'
+    ALL = 'ALL'
+    COMMA = 'COMMA'
+    FROM = 'FROM'
+    WHERE = 'WHERE'
+    ORDER = 'ORDER'
+    GROUP = 'GROUP'
+    BY = 'BY'
+    HAVING = 'HAVING'
+    LIMIT = 'LIMIT'
+    AS = 'AS'
+    OPEN_BRACKET = 'OPEN_BRACKET'
+    CLOSE_BRACKET = 'CLOSE_BRACKET'
+    WILDCARD = 'WILDCARD'
+    DIGIT = 'DIGIT'
+    NAME = 'NAME'
+    EQUAL = 'EQUAL'
+    NOT_EQUAL = 'NOT_EQUAL'
+    NOT = 'NOT'
+    LIKE = 'LIKE'
+    OR = 'OR'
+    AND = 'AND'
+    IS = 'IS'
+    NULL = 'NULL'
+    MORE = 'MORE'
+    MORE_OR_EQUAL = 'MORE_OR_EQUAL'
+    LESS = 'LESS'
+    LESS_OR_EQUAL = 'LESS_OR_EQUAL'
+    PLUS = 'PLUS'
+    MINUS = 'MINUS'
+    MULTIPLY = 'MULTIPLY'
+    DIVIDE = 'DIVIDE'
 
 
 class TokenListBuilder:
