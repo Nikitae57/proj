@@ -30,6 +30,7 @@ class ExpressionTreeBuilder:
 
         isTerm = token[0] in allowedTokenTypes
 
+
 class Expression:
     def __init__(self, andCondition, expression=None):
         self.andCondition = andCondition
@@ -43,8 +44,13 @@ class AndCondition:
 
 
 class Condition:
-    def __init__(self, operandOrExprOrNotExpr):
-
+    def __init__(self, operandFirst=None, expression=None, isNot=None, compare=None, operandSecond=None, like=None):
+        self.operandFirst = operandFirst
+        self.expression = expression
+        self.isNot = isNot
+        self.compare = compare
+        self.operandSecond = operandSecond
+        self.like = like
 
 
 class Summand:
