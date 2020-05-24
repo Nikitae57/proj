@@ -1,1 +1,1 @@
-SELECT 12312, asda FROM A WHERE dsfs sdf3r23f.sgdf
+SELECT 12312, asda FROM A WHERE dsfs = 1

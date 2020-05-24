@@ -8,8 +8,8 @@ class SELECT:
             having=None,
             orderBy=None,
             limit=None,
-            isDistinct=None,
-            isAll=None
+            isDistinct=False,
+            isAll=False
     ):
         self.isAll = isAll
         self.isDistinct = isDistinct

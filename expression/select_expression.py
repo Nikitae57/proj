@@ -1,4 +1,4 @@
 class SelectExpression:
-    def __init__(self, term):
-        self.term = term
+    def __init__(self, termsList):
+        self.termsList = termsList
 

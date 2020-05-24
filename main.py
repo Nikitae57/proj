@@ -1,6 +1,6 @@
 from tree_builders.ast_builder import AstBuilder
-from tokenize.reader import Reader
-from tokenize.token_list_builder import TokenListBuilder
+from tokenizer.reader import Reader
+from tokenizer.token_list_builder import TokenListBuilder
 
 wordList = Reader.readSql('test/1')
 tokenList = TokenListBuilder.buildTokenList(wordList)
