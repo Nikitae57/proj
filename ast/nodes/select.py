@@ -1,8 +1,8 @@
 class SELECT:
     def __init__(
             self,
-            selectExpressionsList,
-            fromExpr,
+            selectExpressionsList=None,
+            fromExpr=None,
             whereExpr=None,
             groupBy=None,
             having=None,

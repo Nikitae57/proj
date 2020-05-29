@@ -10,10 +10,14 @@ class ExpressionTreeBuilder:
         if andCondition is None:
             return None, None
 
-        if len(tokenList) == index:
+        if len(tokenList) == index or tokenList[index][0] != tt.OR:
             return Expression(andCondition), index
 
-        return ExpressionTreeBuilder.buildExprTree(tokenList, index)
+        if tokenList[index][0] == tt.OR:
+            expression, index = ExpressionTreeBuilder.buildExprTree(tokenList, index + 1)
+            return Expression(andCondition=andCondition, expression=expression), index
+        else:
+            return None, None
 
     @staticmethod
     def andCondition(tokenList: list, index: int):
@@ -23,10 +27,14 @@ class ExpressionTreeBuilder:
         if condition is None:
             return None, None
 
-        if len(tokenList) == index:
+        if len(tokenList) == index or tokenList[index][0] != tt.AND:
             return AndCondition(condition), index
 
-        return ExpressionTreeBuilder.andCondition(tokenList, index)
+        if tokenList[index][0] == tt.AND:
+            and_condition, index = ExpressionTreeBuilder.andCondition(tokenList, index + 1)
+            return AndCondition(condition=condition, andCondition=and_condition), index
+        else:
+            return None, None
 
     @staticmethod
     def condition(tokenList: list, index: int):
@@ -41,16 +49,28 @@ class ExpressionTreeBuilder:
             isNot = True
             expression, index = ExpressionTreeBuilder.buildExprTree(tokenList, index + 1)
         elif tokenList[index][0] == tt.OPEN_BRACKET:
-            expression, index = ExpressionTreeBuilder.buildExprTree(tokenList, index + 1)
+            nextIndex = index + 1
+            countBrackets = 1
+            while countBrackets > 0:
+                if tokenList[nextIndex][0] == tt.OPEN_BRACKET:
+                    countBrackets += 1
+                elif tokenList[nextIndex][0] == tt.CLOSE_BRACKET:
+                    countBrackets -= 1
 
-            if tokenList[index][0] != tt.CLOSE_BRACKET:
-                return None, None
-            index += 1
+                nextIndex += 1
+
+            expression, index = ExpressionTreeBuilder.buildExprTree(tokenList[index + 1:nextIndex - 1], 0)
+
+            index = nextIndex
         else:
             firstOperand, index = ExpressionTreeBuilder.summand(tokenList, index)
-            if len(tokenList) == index or firstOperand is None:
+            if firstOperand is None:
                 return None, None
 
+            if len(tokenList) == index:
+                return Condition(operandFirst=firstOperand), index
+
+            compareTokens = [tt.LESS, tt.LESS_OR_EQUAL, tt.EQUAL, tt.MORE, tt.MORE_OR_EQUAL, tt.NOT_EQUAL]
             if tokenList[index][0] == tt.NOT:
                 isNot = True
 
@@ -66,7 +86,7 @@ class ExpressionTreeBuilder:
             elif tokenList[index][0] == tt.LIKE:
                 isLike = True
                 secondOperand, index = ExpressionTreeBuilder.summand(tokenList, index + 1)
-            else:
+            elif tokenList[index][0] in compareTokens:
                 compare, index = ExpressionTreeBuilder.compare(tokenList, index)
                 if len(tokenList) == index or compare is None:
                     return None, None
@@ -74,6 +94,8 @@ class ExpressionTreeBuilder:
                 secondOperand, index = ExpressionTreeBuilder.summand(tokenList, index)
                 if secondOperand is None:
                     return None, None
+            else:
+                return Condition(operandFirst=firstOperand), index
 
         return Condition(operandFirst=firstOperand, expression=expression, isNot=isNot,
                          compare=compare, operandSecond=secondOperand, like=isLike), index
@@ -93,6 +115,9 @@ class ExpressionTreeBuilder:
 
         if factor is None:
             return None, None
+
+        if len(tokenList) == index:
+            return Summand(factor=factor), index
 
         operationList = [tt.MINUS, tt.PLUS]
         if tokenList[index][0] in operationList:
@@ -114,6 +139,9 @@ class ExpressionTreeBuilder:
 
         if term is None:
             return None, None
+
+        if len(tokenList) == index:
+            return Factor(term=term), index
 
         operationList = [tt.DIVIDE, tt.MULTIPLY]
         if tokenList[index][0] in operationList:

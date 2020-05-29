@@ -13,14 +13,14 @@ class TokensTypes:
         'ORDER': r'ORDER',
         'GROUP': r'GROUP',
         'BY': r'BY',
+        'ASC': r'ASC',
+        'DESC': r'DESC',
         'HAVING': r'HAVING',
         'LIMIT': r'LIMIT',
         'AS': r'AS',
         'OPEN_BRACKET': r'\(',
         'CLOSE_BRACKET': r'\)',
         'WILDCARD': r'\*',
-        'DIGIT': r'^-?[0-9]+(\.[0-9]+)?$',
-        'NAME': r'(`\S+`|[A-Za-z_][A-Za-z_0-9]*(\.[A-Za-z_0-9]+)?)',
         'EQUAL': r'=',
         'NOT_EQUAL': r'!=',
         'NOT': r'NOT',
@@ -36,7 +36,9 @@ class TokensTypes:
         'PLUS': r'\+',
         'MINUS': r'-',
         'MULTIPLY': r'\*',
-        'DIVIDE': r'\/'
+        'DIVIDE': r'\/',
+        'DIGIT': r'^-?[0-9]+(\.[0-9]+)?$',
+        'NAME': r'(`\S+`|[A-Za-z_][A-Za-z_0-9]*(\.[A-Za-z_0-9]+)?)'
     }
 
     SELECT = 'SELECT'
@@ -49,6 +51,8 @@ class TokensTypes:
     GROUP = 'GROUP'
     BY = 'BY'
     HAVING = 'HAVING'
+    ASC = 'ASC'
+    DESC = 'DESC'
     LIMIT = 'LIMIT'
     AS = 'AS'
     OPEN_BRACKET = 'OPEN_BRACKET'
